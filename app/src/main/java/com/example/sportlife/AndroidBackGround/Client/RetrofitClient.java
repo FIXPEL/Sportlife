@@ -10,7 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static final OkHttpClient httpClient= new OkHttpClient.Builder()
+            OkHttpClient httpClient= new OkHttpClient.Builder()
             .addInterceptor(new SecurityInterceptor(SessionContext.getAppContext()))
             .authenticator(new AuthenticatorRefresh(SessionContext.getAppContext()))
             .connectTimeout(30, TimeUnit.SECONDS)
