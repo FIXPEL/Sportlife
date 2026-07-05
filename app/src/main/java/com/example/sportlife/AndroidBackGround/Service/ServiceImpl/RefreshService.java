@@ -23,17 +23,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RefreshService{
 
+    private OkHttpClient httpClient= new OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30,TimeUnit.SECONDS)
+            .readTimeout(30,TimeUnit.SECONDS)
+            .build();
+    private Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.2.61:49182/api/").client(httpClient).addConverterFactory(GsonConverterFactory.create()).build();
 
 
 
 
     public RefreshResponse refresh(String tokenRefresh) {
-        OkHttpClient httpClient= new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30,TimeUnit.SECONDS)
-                .readTimeout(30,TimeUnit.SECONDS)
-                .build();
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.2.61:49182/api/").client(httpClient).addConverterFactory(GsonConverterFactory.create()).build();
 
 
 
