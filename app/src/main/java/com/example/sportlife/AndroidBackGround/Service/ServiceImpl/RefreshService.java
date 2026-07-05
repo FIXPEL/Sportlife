@@ -18,20 +18,26 @@ import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import okhttp3.OkHttpClient;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RefreshService{
 
-            OkHttpClient httpClient= new OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30,TimeUnit.SECONDS)
-            .readTimeout(30,TimeUnit.SECONDS)
-            .build();
 
 
 
 
     public RefreshResponse refresh(String tokenRefresh) {
-        ApiRepository apiRepositor= RetrofitClient.getApiRepository();
+        OkHttpClient httpClient= new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30,TimeUnit.SECONDS)
+                .readTimeout(30,TimeUnit.SECONDS)
+                .build();
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.2.61:49182/api/").client(httpClient).addConverterFactory(GsonConverterFactory.create()).build();
+
+
+
+        ApiRepository apiRepositor= retrofit.create(ApiRepository.class);
         RefreshRequest request=new RefreshRequest(tokenRefresh);
         Response<RefreshResponse> responseCall = null;
         try {
