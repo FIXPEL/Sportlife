@@ -20,7 +20,7 @@ public class ActivityFavorites extends ActivityCreate {
 
     @Override
     protected int getIdLayout() {
-        return R.layout.activity_favorites;
+        return R.layout.activity_favourites;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ActivityFavorites extends ActivityCreate {
         prev.setVisibility(View.GONE);
         Button back = this.findViewById(R.id.btnBack);
         back.setOnClickListener(v -> {
-            callBack.onSuccess(ActivityHome.class);//назад
+            callBack.onSuccess(ActivityHome.class);
         });
         TextView tvPage=findViewById(R.id.tvPageNumber);
         next.setOnClickListener(v->{

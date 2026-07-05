@@ -23,9 +23,6 @@ public class RefreshService{
         try {
             responseCall = apiRepositor.refresh(request).execute();
             if(responseCall.isSuccessful()&&responseCall.body()!=null) {
-                Log.d("[REFRESH]","[REFRESH_1]");
-                Log.d("[REFRESH_BODY_1]",responseCall.body().getRefreshToken());
-                Log.d("[REFRESH_BODY_2]",responseCall.body().getAccessToken());
                 return responseCall.body();
             }
         } catch (IOException e) {

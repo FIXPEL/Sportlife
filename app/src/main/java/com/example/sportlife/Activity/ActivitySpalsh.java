@@ -8,7 +8,6 @@ import com.example.sportlife.AndroidBackGround.Controller.ErrorController;
 import com.example.sportlife.AndroidBackGround.Controller.UIController;
 import com.example.sportlife.AndroidBackGround.Security.SessionManager;
 import com.example.sportlife.AndroidBackGround.Service.CallBackHandlerImpl;
-import com.example.sportlife.AndroidBackGround.Service.ServiceImpl.SplashService;
 import com.example.sportlife.R;
 
 public class ActivitySpalsh extends ActivityCreate {
@@ -35,13 +34,12 @@ public class ActivitySpalsh extends ActivityCreate {
                 .load(R.drawable.logo)
                 .circleCrop()
                 .into(zvezda);
-        SplashService service=new SplashService();
         findViewById(R.id.android_splash).postDelayed(() -> {
             if(session.getAccessToken()==null||session.getRefreshToken()==null){
-                service.splash(callBack);
+                callBack.onTools("29","Message");
                 callBack.onSuccess(ActivityMain.class);
             }else{
-                service.splash(callBack);
+                callBack.onTools("29","Message");
                 callBack.onSuccess(ActivityHome.class);
             }
         }, 500);
