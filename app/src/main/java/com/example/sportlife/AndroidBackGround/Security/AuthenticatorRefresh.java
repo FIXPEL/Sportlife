@@ -16,24 +16,24 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
 
-@RequiredArgsConstructor
-public class AuthenticatorRefresh implements Authenticator {
-    private  final Context context;
-    @Nullable
-    @Override
-    public Request authenticate(@Nullable Route route, @NonNull Response response) {
-        SessionManager session=new SessionManager(context);
-        RefreshService refreshService=new RefreshService();
-        String tokenRefresh= session.getRefreshToken();
-        RefreshResponse refresh=refreshService.refresh(tokenRefresh);
-        Log.d("[REFRESH]","[REFRESH_2]");
-        if(refresh==null){
-            return null;
+    @RequiredArgsConstructor
+    public class AuthenticatorRefresh implements Authenticator {
+        private  final Context context;
+        @Nullable
+        @Override
+        public Request authenticate(@Nullable Route route, @NonNull Response response) {
+            SessionManager session=new SessionManager(context);
+            RefreshService refreshService=new RefreshService();
+            String tokenRefresh= session.getRefreshToken();
+            RefreshResponse refresh=refreshService.refresh(tokenRefresh);
+            Log.d("[REFRESH]","[REFRESH_2]");
+            if(refresh==null){
+                return null;
+            }
+            Log.d("[REFRESH_BODY_1]",refresh.getRefreshToken());
+            Log.d("[REFRESH_BODY_2]",refresh.getAccessToken());
+            session.saveToken(refresh.getAccessToken(),refresh.getRefreshToken());
+            String tokenAccess=refresh.getAccessToken();
+            return response.request().newBuilder().header("Authorization", "Bearer " + tokenAccess).build();
         }
-        session.saveToken(refresh.getAccessToken(),refresh.getRefreshToken());
-        Log.d("[REFRESH]","[REFRESH_3]");
-        String tokenAccess=refresh.getAccessToken();
-        Log.d("[REFRESH]","[REFRESH_4]");
-        return response.request().newBuilder().addHeader("Authorization", "Bearer " + tokenAccess).build();
     }
-}

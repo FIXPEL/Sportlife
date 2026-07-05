@@ -71,6 +71,7 @@ public  class ActivityInventory extends ActivityCreate {
             }
         });
         back.setOnClickListener(v->{
+            SearchService.getItems().clear();
             SearchService.getMuscles().clear();
             callBack.onSuccess(ActivityMuscle.class);
         });

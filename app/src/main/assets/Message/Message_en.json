@@ -39,5 +39,7 @@
   "38": "Oops! Looks like that reminder is gone.",
   "39": "New reminder successfully added",
   "40": "The reminder was successfully deleted",
-  "41": "Your reminder has been updated"
+  "41": "Your reminder has been updated",
+  "42": "Please do not spam the app with requests, please wait",
+  "43": "You don't have access to this operation."
 }

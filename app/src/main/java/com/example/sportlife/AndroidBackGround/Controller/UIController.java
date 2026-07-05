@@ -67,11 +67,11 @@ public  class UIController {
     }
     public void ErrorAdvice(ErrorResponse error){
         SessionManager session=new SessionManager(activity);
+        Log.d("ERROR_4",error.getStatus());
         editTexts.forEach(e->e.setText(null));
         editTexts.forEach(e->{
             if(error.getErrors().containsKey(e.getTag().toString())){
                 try {
-                    System.out.println(error.getErrors().get(e.getTag()));
                     e.setText(TranslateClient.translateString(error.getErrors().get(e.getTag()).toString(),"Message",session.getLanguage()));
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
@@ -118,7 +118,7 @@ public  class UIController {
             message=TranslateClient.translateString(message,"Message",session.getLanguage());
             Toast.makeText(activity,message,Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
-
+            throw new RuntimeException(e);
         }
     }
     public void findTop(FindTopResponse response){

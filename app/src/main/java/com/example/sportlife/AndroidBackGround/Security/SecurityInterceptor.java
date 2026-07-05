@@ -21,6 +21,7 @@ public class SecurityInterceptor implements Interceptor {
         SessionManager session = new SessionManager(context);
         Request request = chain.request();
         if (request.header("Authorization") != null) {
+            Log.d("[INTERCEPTOR]","[INTERCEPTOR_0]");
             return chain.proceed(request);
         }
         String path = request.url().encodedPath();
@@ -29,8 +30,7 @@ public class SecurityInterceptor implements Interceptor {
         if (path.contains("/auth")
                 || path.contains("/refresh")
                 || path.contains("/create")
-                || path.contains("/top")
-                || path.contains("/splash")) {
+                || path.contains("/top")) {
             return chain.proceed(request);
         }
         Log.d("[INTERCEPTOR]","[INTERCEPTOR_2]");

@@ -36,13 +36,13 @@ public class CallBackHandlerImpl implements CallBackHandler {
 
     @Override
     public Response filterError(Response response) {
-       Response response1= errorController.filterError(response,this);
-       return response1;
+        return errorController.filterError(response, this);
     }
 
     @Override
     public void onError(Response response) {
         ErrorResponse error=errorController.parseError(response);
+        Log.d("ERROR_3","e");
         uiController.ErrorAdvice(error);
     }
     @Override

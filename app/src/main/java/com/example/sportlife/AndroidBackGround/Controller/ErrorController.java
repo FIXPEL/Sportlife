@@ -25,7 +25,11 @@ public class ErrorController {
     public  Response filterError(Response response, CallBackHandler callBack){
         if(!response.isSuccessful()||response.body()==null){
             if(response.code()==500){
-                callBack.onTools(parseError(response).getErrors().get("500").toString(),"ApiException");
+                callBack.onTools(parseError(response).getErrors().get(Integer.toString(response.code())).toString(),"ApiException");
+                return null;
+            }
+            if(response.code()==429||response.code()==403){
+                callBack.onTools(parseError(response).getErrors().get(Integer.toString(response.code())).toString(),"Message");
                 return null;
             }
             callBack.onError(response);
